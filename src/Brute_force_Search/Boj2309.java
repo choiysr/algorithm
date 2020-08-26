@@ -1,9 +1,15 @@
+package Brute_force_Search;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/* 백준 2309 : 일곱난쟁이 */
+/*
+ * Date : 20. 08. 26
+ * Question.No : 백준 2309 - 일곱난쟁이
+ * Remark :
+ */
 public class Boj2309 {
 
     public static void main(String[] args) throws IOException {
