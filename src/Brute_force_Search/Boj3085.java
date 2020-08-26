@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 /*
  * Date : 20. 08. 26
  * Question.No : 백준 3085 - 사탕 게임
- * Remark :
+ * Remark : 디버깅해야함
  */
 public class Boj3085 {
 
