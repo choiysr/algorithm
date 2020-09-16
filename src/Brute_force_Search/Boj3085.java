@@ -7,7 +7,8 @@ import java.io.InputStreamReader;
 /*
  * Date : 20. 08. 26
  * Question.No : 백준 3085 - 사탕 게임
- * Remark : 디버깅해야함
+ * URL : https://www.acmicpc.net/problem/3085
+ * Remark : 틀림.
  */
 public class Boj3085 {
 
@@ -67,20 +68,19 @@ public class Boj3085 {
                 candyBox[nextX][nextY] = candyBox[x][y];
                 candyBox[x][y] = tmp;
 
-                // 세로로 교환시 2개의 행 체크 (nodeArr[1]까지는 y축(세로)체크)
-                if (i < 2) {
-                    targetLine[0] = y;
-                    targetLine[1] = nextY;
-                    maxOneLine = countCandy(targetLine, true);
-                } else { // 가로로 교환시 2개의 열 체크
+                // 세로로 교환시 2개의 행 체크 (nodeArr[2]이상은 y축(세로)체크)
+                if (i > 1) {
                     targetLine[0] = x;
                     targetLine[1] = nextX;
                     maxOneLine = countCandy(targetLine, false);
+                } else { // 가로로 교환시 2개의 열 체크
+                    targetLine[0] = y;
+                    targetLine[1] = nextY;
+                    maxOneLine = countCandy(targetLine, true);
                 }
 
                 tmpMax = tmpMax > maxOneLine ? tmpMax : maxOneLine;
                 // 끝나고 되돌려야함.
-                printarr();
                 tmp = candyBox[nextX][nextY];
                 candyBox[nextX][nextY] = candyBox[x][y];
                 candyBox[x][y] = tmp;
@@ -92,33 +92,33 @@ public class Boj3085 {
     }
     // end of switchEachNode
 
-    static int countCandy(int[] targetLine, boolean isRow) {
+    static int countCandy(int[] targetLine, boolean isCul) {
 
         char startChar = ' ';
         int maxChar = 0;
-        int tmpChar = 0;
-        //isRow true - 행체크필요 / false - 열체크필요
-        if (isRow) { // 행체크
+        int tmpChar = 1;
+        //isCul true - 열체크필요 / false - 행체크필요
+        if (isCul) { // 열체크
             for (int k = 0; k < targetLine.length; k++) {
                 startChar = candyBox[0][targetLine[k]];
                 for (int i = 1; i < N; i++) {
                     if (startChar != candyBox[i][targetLine[k]]) {
                         startChar = candyBox[i][targetLine[k]];
                         maxChar = maxChar > tmpChar ? maxChar : tmpChar;
-                        tmpChar = 0;
+                        tmpChar = 1;
                     } else {
                         tmpChar++;
                     }
                 }
             }
-        } else { // 열체크
+        } else { // 행체크
             for (int k = 0; k < targetLine.length; k++) {
                 startChar = candyBox[targetLine[k]][0];
                 for (int i = 1; i < N; i++) {
                     if (startChar != candyBox[targetLine[k]][i]) {
                         startChar = candyBox[targetLine[k]][i];
                         maxChar = maxChar > tmpChar ? maxChar : tmpChar;
-                        tmpChar = 0;
+                        tmpChar = 1;
                     } else {
                         tmpChar++;
                     }
