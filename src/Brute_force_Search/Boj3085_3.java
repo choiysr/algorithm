@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
  * URL : https://www.acmicpc.net/problem/3085
  * Remark : 틀림.
  */
-public class Boj3085 {
+public class Boj3085_3 {
 
     // what This class needs
     // [0,0]부터 인접한 노드(최소2개, 최대4개)와 서로 교환하는 메서드
@@ -193,10 +193,6 @@ public class Boj3085 {
 
         return maxCount;
     }
-
-
-
-
 
 }
 
