@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
  * URL : https://www.acmicpc.net/problem/3085
  * Remark : 틀림.
  */
-public class Boj3085 {
+public class Boj3085_2 {
 
     // what This class needs
     // [0,0]부터 인접한 노드(최소2개, 최대4개)와 서로 교환하는 메서드
@@ -36,16 +36,11 @@ public class Boj3085 {
             }
         }
 
-        // 사탕을 교환하지 않은 채 최대 갯수가 나오는 경우 탐색
-        maxCount = countCantyWithoutSwiching();
-        System.out.println("사탕을 교환하지 않은 채 검사시 최대 갯수 > " + maxCount);
-
         // 0,0 부터 인접한 칸과 교환해보자
         for (int x = 0; x < N; x++) {
             for (int y = 0; y < N; y++) {
                 tmpMax = switchEachNode(x, y);
                 maxCount = maxCount > tmpMax ? maxCount : tmpMax;
-                System.out.println("tmpMax => " + tmpMax + "["+x+"]["+y+"]");
             }
         }
 
@@ -73,16 +68,7 @@ public class Boj3085 {
                 candyBox[nextX][nextY] = candyBox[x][y];
                 candyBox[x][y] = tmp;
 
-                // 세로로 교환시 2개의 행 체크 (nodeArr[2]이상은 y축(세로)체크)
-                if (i > 1) {
-                    targetLine[0] = x;
-                    targetLine[1] = nextX;
-                    maxOneLine = countCandy(targetLine, false, y);
-                } else { // 가로로 교환시 2개의 열 체크
-                    targetLine[0] = y;
-                    targetLine[1] = nextY;
-                    maxOneLine = countCandy(targetLine, true, x);
-                }
+                maxOneLine = countCandy();
 
                 tmpMax = tmpMax > maxOneLine ? tmpMax : maxOneLine;
                 // 끝나고 되돌려야함.
@@ -97,75 +83,9 @@ public class Boj3085 {
     }
     // end of switchEachNode
 
-    static int countCandy(int[] targetLine, boolean isCul, int myPosition) {
+    static int countCandy() {
 
-        char startChar = ' ';
-        int maxChar = 1;
-        int tmpChar = 1;
-
-        //isCul true - 열체크필요 / false - 행체크필요
-        if (isCul) { // 열체크
-            for (int k = 0; k < targetLine.length; k++) {
-                startChar = candyBox[0][targetLine[k]];
-                for (int i = 1; i < N; i++) {
-                    if (startChar != candyBox[i][targetLine[k]]) {
-                        startChar = candyBox[i][targetLine[k]];
-                        maxChar = maxChar > tmpChar ? maxChar : tmpChar;
-                        tmpChar = 1;
-                    } else {
-                        tmpChar++;
-                    }
-                }
-            }
-        } else { // 행체크
-            for (int k = 0; k < targetLine.length; k++) {
-                startChar = candyBox[targetLine[k]][0];
-                for (int i = 1; i < N; i++) {
-                    if (startChar != candyBox[targetLine[k]][i]) {
-                        startChar = candyBox[targetLine[k]][i];
-                        maxChar = maxChar > tmpChar ? maxChar : tmpChar;
-                        tmpChar = 1;
-                    } else {
-                        tmpChar++;
-                    }
-                }
-            }
-        }
-
-        char firstChar = isCul ? candyBox[myPosition][0] : candyBox[0][myPosition];
-        int mylineCount = 0;
-
-        for(int i = 1; i< N; i++) {
-            // 열체크를 해야하면 myposition 행체크를 해야한다.
-            if(isCul) {
-                if(firstChar == candyBox[myPosition][i]) {
-                    mylineCount++;
-                } else {
-                    firstChar = candyBox[myPosition][i];
-                    mylineCount = 1;
-                }
-            } else { // 행체크를 해야하면 myposition 열체크를 해야한다.
-                if(firstChar == candyBox[i][myPosition]) {
-                    mylineCount++;
-                } else {
-                    firstChar = candyBox[i][myPosition];
-                    mylineCount = 1;
-                }
-            }
-        }
-
-
-        maxChar = maxChar > mylineCount ? maxChar : mylineCount;
-
-        return maxChar;
-    }
-    // end of checkAmount
-
-
-    static int countCantyWithoutSwiching() {
-
-        int countRow;
-        int countCul;
+        int countRow, countCul;
         int maxCount = 0;
 
         for (int i = 0; i < N - 1; i++) {
@@ -193,9 +113,19 @@ public class Boj3085 {
 
         return maxCount;
     }
+    // end of checkAmount
 
 
+    static void printarr() {
 
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(candyBox[i][j] + ",");
+            }
+            System.out.println();
+        }
+
+    }
 
 
 }
