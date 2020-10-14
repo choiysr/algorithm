@@ -1,11 +1,6 @@
 package Algorithm_Basic;
 
-import Util.TimeChecker;
-
 import java.io.*;
-import java.sql.Time;
-import java.util.Scanner;
-
 /*
  * Date : 20. 10. 12
  * Question.No : 백준 2439 - 별찍기-2
