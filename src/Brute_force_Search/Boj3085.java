@@ -17,8 +17,6 @@ public class Boj3085 {
 
     public static void main(String[] args) throws IOException {
 
-        System.out.println("Hello World!");
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int candyMax = 1;
         int tmpMax = 1;
