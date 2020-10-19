@@ -5,129 +5,110 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /*
- * Date : 20. 08. 26
+ * Date : 20. 10. 16
  * Question.No : 백준 3085 - 사탕 게임
  * URL : https://www.acmicpc.net/problem/3085
- * Remark : 틀림.
+ * Remark :
  */
 public class Boj3085_2 {
 
-    // what This class needs
-    // [0,0]부터 인접한 노드(최소2개, 최대4개)와 서로 교환하는 메서드
-    // 교환이 끝나고 두 사탕의 행,열을 스캔하는 메서드(총 3개줄 - 2열+2행)
-
+    private static int size = 0;
     private static char[][] candyBox = null;
-    private static int N = 0;
-    private static int[] xnodeArr = {0, 0, 1, -1};
-    private static int[] ynodeArr = {-1, 1, 0, 0};
-    private static int maxCount = 0;
 
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
-        candyBox = new char[N][N];
-        int tmpMax = 0;
+        size = Integer.parseInt(br.readLine());
+        candyBox = new char[size][size];
+        int maxCount = 1;
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < size; i++) {
             String line = br.readLine();
-            for (int j = 0; j < N; j++) {
+            for (int j = 0; j < size; j++) {
                 candyBox[i][j] = line.charAt(j);
             }
         }
 
-        // 0,0 부터 인접한 칸과 교환해보자
-        for (int x = 0; x < N; x++) {
-            for (int y = 0; y < N; y++) {
-                tmpMax = switchEachNode(x, y);
-                maxCount = maxCount > tmpMax ? maxCount : tmpMax;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                int tmpCount = switchEachCandy(i, j);
+                maxCount = tmpCount > maxCount ? tmpCount : maxCount;
             }
         }
 
         System.out.println(maxCount);
     }
-    // end of main
 
-    // @param : 좌표
-    static int switchEachNode(int x, int y) {
 
-        int nextX = 0;
-        int nextY = 0;
-        int tmpMax = 0;
-        int maxOneLine = 0;
-        int[] targetLine = new int[2];
+    public static int switchEachCandy(int x, int y) {
 
-        for (int i = 0; i < 4; i++) {
-            if (x + xnodeArr[i] < 0 || x + xnodeArr[i] >= N || y + ynodeArr[i] < 0 || y + ynodeArr[i] >= N) {
-                continue;
+        int count = 1;
+
+        // 우측교환
+        if (!(y + 1 >= size)) {
+            char tmpChar = candyBox[x][y];
+            candyBox[x][y] = candyBox[x][y + 1];
+            candyBox[x][y + 1] = tmpChar;
+            // [2,2]과 [2,3]을 교환했다고 하면
+            // 자기줄 가로체크 2번라인 체크  >> [2][0],[2][1]....
+            // countRow(x);
+            // 원래줄 세로체크 2번라인 체크 >> [0][2], [1][2]....
+            // countCul(y);
+            // 바꾼줄 세로체크 3번라인 체크 >> [0][3], [1][3]....
+            // countCul(y+1);
+            count = Math.max(countRow(x), Math.max(countCul(y), countCul(y + 1)));
+            candyBox[x][y + 1] = candyBox[x][y];
+            candyBox[x][y] = tmpChar;
+        }
+
+        // 아래교환
+        if (!(x + 1 >= size)) {
+            int tmpCount = 0;
+            char tmpChar = candyBox[x][y];
+            candyBox[x][y] = candyBox[x + 1][y];
+            candyBox[x + 1][y] = tmpChar;
+            tmpCount = Math.max(countCul(y), Math.max(countRow(x), countRow(x + 1)));
+            count = tmpCount > count ? tmpCount : count;
+            candyBox[x + 1][y] = candyBox[x][y];
+            candyBox[x][y] = tmpChar;
+        }
+        return count;
+    }
+
+    // 가로체크메서드
+    public static int countRow(int lineNo) {
+
+        int count = 1;
+        int tmpCount = 1;
+
+        for (int i = 0; i < size - 1; i++) {
+            if (candyBox[lineNo][i] == candyBox[lineNo][i + 1]) {
+                tmpCount++;
             } else {
-                nextX = x + xnodeArr[i];
-                nextY = y + ynodeArr[i];
-
-                char tmp = candyBox[nextX][nextY];
-                candyBox[nextX][nextY] = candyBox[x][y];
-                candyBox[x][y] = tmp;
-
-                maxOneLine = countCandy();
-
-                tmpMax = tmpMax > maxOneLine ? tmpMax : maxOneLine;
-                // 끝나고 되돌려야함.
-                tmp = candyBox[nextX][nextY];
-                candyBox[nextX][nextY] = candyBox[x][y];
-                candyBox[x][y] = tmp;
+                count = tmpCount > count ? tmpCount : count;
+                tmpCount = 1;
             }
         }
-
-        return tmpMax;
-
+        count = tmpCount > count ? tmpCount : count;
+        return count;
     }
-    // end of switchEachNode
 
-    static int countCandy() {
+    // 세로체크메서드
+    public static int countCul(int lineNo) {
 
-        int countRow, countCul;
-        int maxCount = 0;
+        int count = 1;
+        int tmpCount = 1;
 
-        for (int i = 0; i < N - 1; i++) {
-            countRow = 0;
-            countCul = 0;
-            for (int j = 0; j < N - 1; j++) {
-                // 가로(행)이 같은 경우
-                if (candyBox[i][j] == candyBox[i][j + 1]) {
-                    countRow++;
-                    if(j==N-2) {
-                        countRow++;
-                    }
-                }
-                // 세로(열)이 같은 경우
-                if (candyBox[j][i] == candyBox[j + 1][i]) {
-                    countCul++;
-                    if(j==N-2) {
-                        countCul++;
-                    }
-                }
+        for (int i = 0; i < size - 1; i++) {
+            if (candyBox[i][lineNo] == candyBox[i + 1][lineNo]) {
+                tmpCount++;
+            } else {
+                count = tmpCount > count ? tmpCount : count;
+                tmpCount = 1;
             }
-            int tmpCount = Math.max(countRow, countCul);
-            maxCount = maxCount < tmpCount ? tmpCount : maxCount;
         }
-
-        return maxCount;
+        count = tmpCount > count ? tmpCount : count;
+        return count;
     }
-    // end of checkAmount
-
-
-    static void printarr() {
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(candyBox[i][j] + ",");
-            }
-            System.out.println();
-        }
-
-    }
-
 
 }
-
-
