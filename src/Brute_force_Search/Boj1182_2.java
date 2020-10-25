@@ -19,7 +19,6 @@ public class Boj1182_2 {
     private static void backTracking(int index, int sum) {
 
 
-        
 
     }
 }
