@@ -45,7 +45,6 @@ public class Boj2798 {
         }
 
         if(depth == 3)  {
-            printArr();
             result = goal-sum < goal-result ? sum : result;
             return;
         }
@@ -56,14 +55,5 @@ public class Boj2798 {
             blackJack[depth] = 0;
         }
     }
-
-    public static void printArr() {
-        for(int e : blackJack) {
-            System.out.print(e+" ");
-        }
-        System.out.println();
-    }
-
-
 
 }
