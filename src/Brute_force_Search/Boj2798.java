@@ -40,18 +40,30 @@ public class Boj2798 {
 
     public static void chooseCards(int index, int depth, int sum) {
 
-        if(sum > goal) {return;}
+        if(sum > goal) {
+            return;
+        }
 
         if(depth == 3)  {
+            printArr();
             result = goal-sum < goal-result ? sum : result;
             return;
         }
 
         for(int i=index+1; i<cardPack.length; i++) {
             blackJack[depth] = cardPack[i];
-            chooseCards(i+1, depth+1, sum+blackJack[depth]);
+            chooseCards(i, depth+1, sum+blackJack[depth]);
             blackJack[depth] = 0;
         }
     }
+
+    public static void printArr() {
+        for(int e : blackJack) {
+            System.out.print(e+" ");
+        }
+        System.out.println();
+    }
+
+
 
 }
