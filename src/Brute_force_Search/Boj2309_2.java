@@ -6,6 +6,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Date : 21. 02. 08
+ * Question.No : 백준 2309 - 일곱 난쟁이
+ * Remark : Stream 사용
+ */
 public class Boj2309_2 {
 
     public static void main(String[] args) throws IOException {
