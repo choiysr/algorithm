@@ -11,13 +11,12 @@ import java.util.StringTokenizer;
  * Date : 21. 02. 09
  * Question.No : 백준 14501 - 퇴사
  * URL : https://www.acmicpc.net/problem/14501
- * Remark : PASS는 했으나 엉망진창. 다시 보기. 아래 질문URL 공부해보기
+ * Remark : 수정했으나 어떻게 푼 지 모르겠음. 도움이 됐던 글
  * //https://www.acmicpc.net/board/view/62119
  */
 public class Boj14501 {
 
     private static int[][] schedule;
-    private static int finalMax = 0;
 
     public static void main(String[] args) {
 
@@ -30,8 +29,7 @@ public class Boj14501 {
         }
 
         maxPay = getMaxPay(0,0);
-
-        System.out.println(finalMax);
+        System.out.println(maxPay);
 
     }
 
@@ -58,11 +56,10 @@ public class Boj14501 {
         for(int i = start ; i < schedule[0].length; i+=nextDay) {
             if(i+schedule[0][i] <= schedule[0].length) {
                 // 나를 선택하지 않는 경우
-                tmp = getMaxPay(maxPay,i+1);
+                tmp = Math.max(tmp,getMaxPay(maxPay,i+1));
                 // 나를 선택하는 경우
                 maxPay += schedule[1][i];
                 nextDay = schedule[0][i];
-                finalMax = Math.max(finalMax, Math.max(tmp,maxPay));
             } else {
                 nextDay=1;
             }
