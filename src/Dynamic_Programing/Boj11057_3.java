@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Date : 21. 02. 18
  * Question.No : 백준 11057 - 오르막수
  * URL : https://www.acmicpc.net/problem/11057
- * Remark : 두번째 풀이. 문자열로 풀것.
+ * Remark : 세번째 풀이. long이용. 배열에 저장시 처음부터 나머지값을 저장.
  */
 public class Boj11057_3 {
 

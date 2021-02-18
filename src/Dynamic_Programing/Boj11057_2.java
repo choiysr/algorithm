@@ -12,7 +12,7 @@ import java.util.Arrays;
  * Date : 21. 02. 18
  * Question.No : 백준 11057 - 오르막수
  * URL : https://www.acmicpc.net/problem/11057
- * Remark : 두번째 풀이. 문자열로 풀것.
+ * Remark : 두번째 풀이. BigInteger이용. 메모리와 시간을 세번째 풀이보다 더 많이 잡아먹음.
  */
 public class Boj11057_2 {
 
