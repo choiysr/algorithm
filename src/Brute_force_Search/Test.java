@@ -12,7 +12,7 @@ public class Test {
     public static void main(String[] args) throws IOException {
         int[] triNum = getTriNum();
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new  BufferedReader(new InputStreamReader(System.in));
         int num = Integer.parseInt(br.readLine());
         int[] inputList = new int[num];
         

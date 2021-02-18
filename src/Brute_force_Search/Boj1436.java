@@ -18,26 +18,16 @@ public class Boj1436 {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
-        int count = 0;
+        int i = 666;
 
-
-        for(int i = 666; i <= 10000666; i++) {
-            if(contains666(i)) {
-                count++;
+        while(N!=0) {
+            if(String.valueOf(i).indexOf("666") > -1){
+                N--;
             }
-
-            if(count==N) {
-                System.out.println(i);
-                break;
-            }
+            i++;
         }
-    }
 
-
-    public static boolean contains666(int number) {
-
-        String fullNumber = String.valueOf(number);
-        return fullNumber.contains("666");
+        System.out.println(i-1);
 
     }
 
