@@ -20,6 +20,7 @@ public class Boj11057_3 {
         long[] raisingNumber = new long[10];
         Arrays.fill(raisingNumber, 1);
 
+
         while (--input > 0) {
             sum = 0;
             for (int i = 0; i < raisingNumber.length; i++) {

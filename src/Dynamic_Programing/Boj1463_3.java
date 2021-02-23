@@ -8,6 +8,6 @@ package Dynamic_Programing;
 public class Boj1463_3 {
 
     public static void main(String[] args) {
-        
+
     }
 }
