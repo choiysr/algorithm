@@ -53,6 +53,7 @@ public class Boj1463_3 {
                     setArray(i, 2);
                 }
             } else if (i % 3 == 0) {
+                // 1을 빼는 경우와 3으로 나누는 경우를 비교.
                 if (getElementByIndex(i,1) < getElementByIndex(i,3)) {
                     setArray(i, 1);
                 } else {
