@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 /*
  * Date : 21. 02. 23
  * Question.No : 백준 1463 - 1로 만들기
- * Remark : 맞았습니다
+ * Remark : 맞았습니다. 간단하게 풀수 있는 방법이 있다.
  *
 570 // 정답: 8
 571 // 정답: 9
