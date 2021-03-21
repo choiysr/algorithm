@@ -17,13 +17,13 @@ public class Boj2839 {
         int sugar = Integer.parseInt(br.readLine());
         int mod5 = sugar % 5;
 
-        if (4 == sugar || 7 == sugar) {
-            System.out.println(-1);
-        } else if (0 == mod5) {
-            System.out.println(sugar / 5);
-        } else if (1 == mod5 || 3 == mod5) {
-            System.out.println(sugar / 5 + 1);
-        } else if (2 == mod5 || 4 == mod5) {
+            if (4 == sugar || 7 == sugar) {
+                System.out.println(-1);
+            } else if (0 == mod5) {
+                System.out.println(sugar / 5);
+            } else if (1 == mod5 || 3 == mod5) {
+                System.out.println(sugar / 5 + 1);
+            } else if (2 == mod5 || 4 == mod5) {
             System.out.println(sugar / 5 + 2);
         } else {
             System.out.println(sugar / 3);
