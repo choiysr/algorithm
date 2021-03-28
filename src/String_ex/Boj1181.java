@@ -2,8 +2,8 @@ package String_ex;
 
 /*
  * Date : 2021-03-28
- * Question.No :
- * Remark :
+ * Question.No : 1181 - 단어정렬
+ * Remark : Stream 연습용. 기본정렬 외 정렬시 comparator 사용해야함.
  */
 
 import java.io.BufferedReader;

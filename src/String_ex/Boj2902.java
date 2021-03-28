@@ -1,7 +1,9 @@
-package String_ex;/*
+package String_ex;
+
+/*
  * Date : 2021-03-28
- * Question.No :
- * Remark :
+ * Question.No : 2902 - KMP는 왜 KMP일까?
+ * Remark : Stream 연습용
  */
 
 import java.io.BufferedReader;
