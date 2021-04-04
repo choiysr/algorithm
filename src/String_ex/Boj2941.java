@@ -3,7 +3,7 @@ package String_ex;
 /*
  * Date : 2021-03-28
  * Question.No : 2941 - 크로아티아 알파벳
- * Remark : Stream 써서 해보자 
+ * Remark : Stream 써서 해보자
  */
 
 import java.io.BufferedReader;
