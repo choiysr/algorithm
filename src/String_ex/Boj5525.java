@@ -10,38 +10,49 @@ import java.io.InputStreamReader;
 
 public class Boj5525 {
 
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static int N, M;
+    private static char[] input;
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
-        M = Integer.parseInt(br.readLine());
-        String input = br.readLine();
+    static {
+        try {
+            N = lineToInt();
+            M = lineToInt();
+            input = br.readLine().toCharArray();
+        } catch (IOException e) {
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("I");
-        for (int i = 0; i < N * 2; i++) {
-            if (i == 0 || i % 2 == 0) {
-                sb.append("O");
-            } else {
-                sb.append("I");
-            }
         }
+    }
 
-        String pn = sb.toString();
+    public static void main(String[] args) {
+
         int count = 0;
+        int patternCount = 0;
 
-        for (int i = 0; i < M; i++) {
-            if (input.charAt(i) == 'I' && i+pn.length()<=input.length()) {
-                if (input.substring(i, pn.length()+i).equals(pn)) {
+        for (int i = 1; i < input.length - 1; i++) {
+            if(input[i-1] == 'I' && input[i] == 'O' && input[i+1] == 'I') {
+                patternCount++;
+                if(patternCount == N) {
+                    patternCount--;
                     count++;
                 }
+                i++;
+            } else {
+                patternCount = 0;
             }
         }
+
 
         System.out.println(count);
 
+
     }
+
+
+    private static int lineToInt() throws IOException {
+        return Integer.parseInt(br.readLine());
+    }
+
 }
 
 
